@@ -35,16 +35,19 @@ if ($user === null) {
     <title>Profile</title>
     <link rel="stylesheet" href="../css/style.css">
     <script>
-function handleLikeDislike(post_id, action) {
-    fetch('like_dislike_post.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `post_id=${post_id}&action=${action}`,
-    })
+    function handleLikeDislike(post_id, action) {
+        console.log("Button clicked. Post ID:", post_id, "Action:", action); // Debugging line
+
+        fetch('like_dislike_post.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `post_id=${post_id}&action=${action}`,
+        })
         .then(response => response.json())
         .then(data => {
+            console.log("Response from server:", data); // Debugging line
             if (data.status === 'success') {
                 document.getElementById(`likes-count-${post_id}`).innerText = data.likes;
                 document.getElementById(`dislikes-count-${post_id}`).innerText = data.dislikes;
@@ -57,9 +60,8 @@ function handleLikeDislike(post_id, action) {
             }
         })
         .catch(error => console.error('Error:', error));
-}
-</script>
-
+    }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -100,12 +102,9 @@ function handleLikeDislike(post_id, action) {
                 if ($post['image']) {
                     echo '<img src="../images/' . htmlspecialchars($post['image']) . '" alt="Post Image">';
                 }
-                echo '<p><strong>Likes:</strong> ' . $post['likes'] . ' <strong>Dislikes:</strong> ' . $post['dislikes'] . '</p>';
-                echo '<form action="like_dislike_post.php" method="POST">';
-                echo '<input type="hidden" name="post_id" value="' . $post['id'] . '">';
-                echo '<button type="submit" name="action" value="like">Like</button>';
-                echo '<button type="submit" name="action" value="dislike">Dislike</button>';
-                echo '</form>';
+                echo '<p><strong>Likes:</strong> <span id="likes-count-' . $post['id'] . '">' . $post['likes'] . '</span> <strong>Dislikes:</strong> <span id="dislikes-count-' . $post['id'] . '">' . $post['dislikes'] . '</span></p>';
+                echo '<button id="like-btn-' . $post['id'] . '" class="like-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'like\')">👍 Like</button>';
+                echo '<button id="dislike-btn-' . $post['id'] . '" class="dislike-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'dislike\')">👎 Dislike</button>';
                 echo '</div>';
             }
             ?>
@@ -219,16 +218,15 @@ function handleLikeDislike(post_id, action) {
         margin-top: 10px;
     }
 
-    .user-posts form {
-        margin-top: 10px;
-        display: flex;
-        justify-content: space-between;
-    }
-
     .user-posts button {
         padding: 5px 15px;
         margin: 0 5px;
         cursor: pointer;
+    }
+
+    .user-posts button.active {
+        color: white;
+        background-color: #007BFF;
     }
 
     .user-posts button:hover {
