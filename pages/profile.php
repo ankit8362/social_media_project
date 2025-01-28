@@ -36,7 +36,7 @@ if ($user === null) {
     <link rel="stylesheet" href="../css/style.css">
     <script>
     function handleLikeDislike(post_id, action) {
-        console.log("Button clicked. Post ID:", post_id, "Action:", action); // Debugging line
+        console.log("Button clicked. Post ID:", post_id, "Action:", action);
 
         fetch('like_dislike_post.php', {
             method: 'POST',
@@ -47,7 +47,7 @@ if ($user === null) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Response from server:", data); // Debugging line
+            console.log("Response from server:", data);
             if (data.status === 'success') {
                 document.getElementById(`likes-count-${post_id}`).innerText = data.likes;
                 document.getElementById(`dislikes-count-${post_id}`).innerText = data.dislikes;
@@ -98,6 +98,7 @@ if ($user === null) {
             
             while ($post = $post_result->fetch_assoc()) {
                 echo '<div class="post">';
+                echo '<a href="delete_post.php?post_id=' . $post['id'] . '" class="delete-btn">X</a>';
                 echo '<p>' . htmlspecialchars($post['description']) . '</p>';
                 if ($post['image']) {
                     echo '<img src="../images/' . htmlspecialchars($post['image']) . '" alt="Post Image">';
@@ -209,6 +210,7 @@ if ($user === null) {
         background-color: #f1f1f1;
         padding: 15px;
         border-radius: 8px;
+        position: relative;
     }
 
     .user-posts .post img {
@@ -231,5 +233,21 @@ if ($user === null) {
 
     .user-posts button:hover {
         background-color: #d3d3d3;
+    }
+
+    /* Styling for the delete button */
+    .delete-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: red;
+        text-decoration: none;
+        background-color: transparent;
+        border: none;
+    }
+
+    .delete-btn:hover {
+        cursor: pointer;
     }
 </style>
