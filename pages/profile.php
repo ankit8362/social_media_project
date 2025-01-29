@@ -34,6 +34,7 @@ if ($user === null) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <script>
     function handleLikeDislike(post_id, action) {
         console.log("Button clicked. Post ID:", post_id, "Action:", action);
@@ -60,6 +61,12 @@ if ($user === null) {
             }
         })
         .catch(error => console.error('Error:', error));
+    }
+
+    function confirmDelete(post_id) {
+        if (confirm("Are you sure you want to delete this post?")) {
+            window.location.href = "delete_post.php?post_id=" + post_id;
+        }
     }
     </script>
 </head>
@@ -98,7 +105,7 @@ if ($user === null) {
             
             while ($post = $post_result->fetch_assoc()) {
                 echo '<div class="post">';
-                echo '<a href="delete_post.php?post_id=' . $post['id'] . '" class="delete-btn">X</a>';
+                echo '<a href="javascript:void(0);" onclick="confirmDelete(' . $post['id'] . ');" class="delete-btn">X</a>';
                 echo '<p>' . htmlspecialchars($post['description']) . '</p>';
                 if ($post['image']) {
                     echo '<img src="../images/' . htmlspecialchars($post['image']) . '" alt="Post Image">';
@@ -113,141 +120,3 @@ if ($user === null) {
     </div>
 </body>
 </html>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-        text-align: center;
-        color: #333;
-    }
-
-    .profile {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .profile-pic {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    .profile-info {
-        margin-top: 10px;
-    }
-
-    .profile-info p {
-        font-size: 16px;
-        color: #555;
-    }
-
-    .profile-info a {
-        font-size: 14px;
-        color: #007BFF;
-        text-decoration: none;
-    }
-
-    .profile-info a:hover {
-        text-decoration: underline;
-    }
-
-    .create-post {
-        margin-top: 30px;
-    }
-
-    .create-post form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .create-post textarea {
-        width: 80%;
-        height: 100px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-
-    .create-post input {
-        margin: 10px 0;
-    }
-
-    .create-post button {
-        background-color: #007BFF;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .create-post button:hover {
-        background-color: #0056b3;
-    }
-
-    .user-posts {
-        margin-top: 40px;
-    }
-
-    .user-posts .post {
-        margin-bottom: 20px;
-        background-color: #f1f1f1;
-        padding: 15px;
-        border-radius: 8px;
-        position: relative;
-    }
-
-    .user-posts .post img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin-top: 10px;
-    }
-
-    .user-posts button {
-        padding: 5px 15px;
-        margin: 0 5px;
-        cursor: pointer;
-    }
-
-    .user-posts button.active {
-        color: white;
-        background-color: #007BFF;
-    }
-
-    .user-posts button:hover {
-        background-color: #d3d3d3;
-    }
-
-    /* Styling for the delete button */
-    .delete-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 20px;
-        color: red;
-        text-decoration: none;
-        background-color: transparent;
-        border: none;
-    }
-
-    .delete-btn:hover {
-        cursor: pointer;
-    }
-</style>
