@@ -74,5 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <a href="signin.php">Already have an account? Sign In</a>
         </div>
     </div>
+    <script src="../assets/js/password.js"></script>
+
 </body>
 </html>

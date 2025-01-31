@@ -35,6 +35,7 @@ if ($user === null) {
     <title>Profile</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script>
     function handleLikeDislike(post_id, action) {
         console.log("Button clicked. Post ID:", post_id, "Action:", action);
@@ -76,9 +77,12 @@ if ($user === null) {
 
         <div class="profile">
             <img src="../images/<?php echo htmlspecialchars($user['profile_pic']) ? htmlspecialchars($user['profile_pic']) : 'default-profile.png'; ?>" alt="Profile Picture" class="profile-pic">
-            
+        
             <div class="profile-info">
-                <p><strong>Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?> <a href="editProfile.php">Edit</a></p>
+                <p><a href="editProfile.php" class="edit-icon">
+                   <i class="fas fa-pencil-alt"></i>
+                </a></p>
+                <p><strong>Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
                 <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($user['dob']); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
             </div>
