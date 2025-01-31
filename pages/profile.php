@@ -80,7 +80,7 @@ if ($user === null) {
         
             <div class="profile-info">
                 <p><a href="editProfile.php" class="edit-icon">
-                   <i class="fas fa-pencil-alt"></i>
+                   <i class="fas fa-pencil-alt" style="font-size:18px;"></i>
                 </a></p>
                 <p><strong>Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
                 <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($user['dob']); ?></p>
