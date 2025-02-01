@@ -33,7 +33,7 @@ if ($user === null) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script>
@@ -77,11 +77,10 @@ if ($user === null) {
 
         <div class="profile">
             <img src="../images/<?php echo htmlspecialchars($user['profile_pic']) ? htmlspecialchars($user['profile_pic']) : 'default-profile.png'; ?>" alt="Profile Picture" class="profile-pic">
-        
-            <div class="profile-info">
-                <p><a href="editProfile.php" class="edit-icon">
+            <a href="editProfile.php" class="edit-icon">
                    <i class="fas fa-pencil-alt" style="font-size:18px;"></i>
-                </a></p>
+                </a>
+            <div class="profile-info">
                 <p><strong>Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
                 <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($user['dob']); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
