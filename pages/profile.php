@@ -33,9 +33,9 @@ if ($user === null) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <!-- <link rel="stylesheet" href="../css/style.css"> -->
     <link rel="stylesheet" href="../css/profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.2.0/remixicon.css">
+    <!-- <link rel="stylesheet" href="../assets/js/profile.js"> -->
     <script>
     function handleLikeDislike(post_id, action) {
         console.log("Button clicked. Post ID:", post_id, "Action:", action);
@@ -79,7 +79,7 @@ if ($user === null) {
             <img src="../images/<?php echo htmlspecialchars($user['profile_pic']) ? htmlspecialchars($user['profile_pic']) : 'default-profile.png'; ?>" alt="Profile Picture" class="profile-pic">
             <a href="editProfile.php" class="edit-icon">
                    <i class="fas fa-pencil-alt" style="font-size:18px;"></i>
-                </a>
+            </a>
             <div class="profile-info">
                 <p><strong>Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
                 <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($user['dob']); ?></p>
@@ -114,8 +114,12 @@ if ($user === null) {
                     echo '<img src="../images/' . htmlspecialchars($post['image']) . '" alt="Post Image">';
                 }
                 echo '<p><strong>Likes:</strong> <span id="likes-count-' . $post['id'] . '">' . $post['likes'] . '</span> <strong>Dislikes:</strong> <span id="dislikes-count-' . $post['id'] . '">' . $post['dislikes'] . '</span></p>';
-                echo '<button id="like-btn-' . $post['id'] . '" class="like-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'like\')">👍 Like</button>';
-                echo '<button id="dislike-btn-' . $post['id'] . '" class="dislike-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'dislike\')">👎 Dislike</button>';
+                echo '<button id="like-btn-' . $post['id'] . '" class="like-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'like\')">
+                        <i class="ri-thumb-up-line"></i>
+                      </button>';
+                echo '<button id="dislike-btn-' . $post['id'] . '" class="dislike-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'dislike\')">
+                        <i class="ri-thumb-down-line"></i>
+                      </button>';
                 echo '</div>';
             }
             ?>

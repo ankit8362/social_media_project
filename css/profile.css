@@ -38,16 +38,6 @@ h1 {
     color: #555;
 }
 
-.profile-info a {
-    font-size: 14px;
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.profile-info a:hover {
-    text-decoration: underline;
-}
-
 .create-post {
     margin-top: 30px;
 }
@@ -133,3 +123,22 @@ h1 {
     cursor: pointer;
 }
 
+/* Button Styling */
+.like-btn, .dislike-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 15px;  /* Adjust this value to control the size */
+}
+
+
+
+.like-btn, .dislike-btn i {
+    font-size: 26px; /* Adjust icon size here */
+}
+.like-btn.active {
+    background-color: green; /* Green color for active like */
+}
+.dislike-btn.active {
+    background-color: red; /* Red color for active dislike */
+}

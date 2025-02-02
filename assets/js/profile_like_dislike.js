@@ -1,0 +1,65 @@
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch user's like/dislike status on page load
+    fetch('get_user_likes.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const userLikes = data.user_likes;
+                Object.keys(userLikes).forEach(postId => {
+                    const likeButton = document.getElementById(`like-btn-${postId}`);
+                    const dislikeButton = document.getElementById(`dislike-btn-${postId}`);
+
+                    // Add 'active' class based on the user's like/dislike status
+                    if (userLikes[postId] === 'like') {
+                        likeButton.classList.add('active');
+                        dislikeButton.classList.remove('active');
+                    } else if (userLikes[postId] === 'dislike') {
+                        dislikeButton.classList.add('active');
+                        likeButton.classList.remove('active');
+                    }
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching user likes:', error));
+
+    // Function to handle like/dislike actions
+    function handleLikeDislike(post_id, action) {
+        fetch('like_dislike_post.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `post_id=${post_id}&action=${action}`,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Update the like/dislike counts
+                document.getElementById(`likes-count-${post_id}`).innerText = data.likes;
+                document.getElementById(`dislikes-count-${post_id}`).innerText = data.dislikes;
+
+                const likeButton = document.getElementById(`like-btn-${post_id}`);
+                const dislikeButton = document.getElementById(`dislike-btn-${post_id}`);
+
+                // Toggle the 'active' class for button color
+                if (action === 'like') {
+                    likeButton.classList.add('active');
+                    dislikeButton.classList.remove('active');
+                } else if (action === 'dislike') {
+                    dislikeButton.classList.add('active');
+                    likeButton.classList.remove('active');
+                }
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Attach event listeners to like/dislike buttons
+    document.querySelectorAll('.like-btn, .dislike-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const postId = this.dataset.postId;
+            const action = this.classList.contains('like-btn') ? 'like' : 'dislike';
+            handleLikeDislike(postId, action);
+        });
+    });
+});

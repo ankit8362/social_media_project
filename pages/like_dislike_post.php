@@ -26,22 +26,26 @@ $stmt->bind_param('ii', $user_id, $post_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-    // User already liked/disliked this post
-    $row = $result->fetch_assoc();
+$current_action = null;
 
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $current_action = is_null($row['deleted_at']) ? $row['action'] : null;
+    
     if ($row['action'] === $action && is_null($row['deleted_at'])) {
         // If the same action is clicked again, soft-delete the record
         $soft_delete_query = "UPDATE post_likes SET deleted_at = NOW() WHERE user_id = ? AND post_id = ?";
         $soft_delete_stmt = $conn->prepare($soft_delete_query);
         $soft_delete_stmt->bind_param('ii', $user_id, $post_id);
         $soft_delete_stmt->execute();
+        $current_action = null; // Reset action since it's deleted
     } else {
         // Reactivate or update the action (in case it was soft-deleted or a different action is selected)
         $reactivate_query = "UPDATE post_likes SET action = ?, deleted_at = NULL, updated_at = NOW() WHERE user_id = ? AND post_id = ?";
         $reactivate_stmt = $conn->prepare($reactivate_query);
         $reactivate_stmt->bind_param('sii', $action, $user_id, $post_id);
         $reactivate_stmt->execute();
+        $current_action = $action; // Set current action for response
     }
 } else {
     // User has not liked/disliked this post yet, insert a new record
@@ -49,6 +53,7 @@ if ($result->num_rows > 0) {
     $insert_stmt = $conn->prepare($insert_query);
     $insert_stmt->bind_param('iis', $user_id, $post_id, $action);
     $insert_stmt->execute();
+    $current_action = $action;
 }
 
 // Count active likes and dislikes for the post
@@ -69,11 +74,11 @@ $update_post_stmt = $conn->prepare($update_post_query);
 $update_post_stmt->bind_param('iii', $count_data['likes'], $count_data['dislikes'], $post_id);
 $update_post_stmt->execute();
 
-// Return the updated counts
+// Return the updated counts along with the user's current action
 echo json_encode([
     'status' => 'success',
     'likes' => $count_data['likes'],
-    'dislikes' => $count_data['dislikes']
+    'dislikes' => $count_data['dislikes'],
+    'user_action' => $current_action // Send user's last action to frontend
 ]);
 exit();
-?>
