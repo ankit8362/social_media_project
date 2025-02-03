@@ -64,11 +64,6 @@ h1 {
     text-decoration: underline;
 }
 /* for sign in pages */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-}
-
 h1 {
     text-align: center;
     color: #333;
