@@ -122,6 +122,9 @@ h1 {
 .delete-btn:hover {
     cursor: pointer;
 }
+.like-btn{
+    background: none;
+}
 
 /* Button Styling */
 .like-btn, .dislike-btn {
