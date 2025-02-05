@@ -94,7 +94,7 @@ if ($user === null) {
             <h2>Create a New Post</h2>
             <form action="create_post.php" method="POST" enctype="multipart/form-data">
                 <textarea name="description" placeholder="Write your post..." required></textarea><br>
-                <input type="file" name="post_image" required><br>
+                <input type="file" name="post_image"><br>
                 <button type="submit">Post</button>
             </form>
         </div>
