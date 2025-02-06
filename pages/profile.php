@@ -96,6 +96,7 @@ if ($user === null) {
                 <textarea name="description" placeholder="Write your post..." required></textarea><br>
                 <input type="file" name="post_image"><br>
                 <button type="submit">Post</button>
+                
             </form>
         </div>
 
@@ -127,6 +128,9 @@ if ($user === null) {
             }
             ?>
         </div>
+        <button class="logout" style="color:white;">
+               <a href="logout.php" class="logout">Logout</a>
+               </button>
     </div>
 </body>
 </html>
