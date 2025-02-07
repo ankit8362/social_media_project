@@ -37,6 +37,8 @@ if ($user === null) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.2.0/remixicon.css">
     <!-- Font Awesome CDN for Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
 
     <!-- <link rel="stylesheet" href="../assets/js/profile.js"> -->
     <script>
@@ -112,8 +114,8 @@ if ($user === null) {
             
             while ($post = $post_result->fetch_assoc()) {
                 echo '<div class="post">';
-                echo '<a href="javascript:void(0);" onclick="confirmDelete(' . $post['id'] . ');" class="delete-btn">X</a>';
-                echo '<p>' . htmlspecialchars($post['description']) . '</p>';
+                echo '<a href="javascript:void(0);" onclick="confirmDelete(' . $post['id'] . ');" class="delete-btn"><i class="ri-close-large-line"></i></a>';
+                echo '<p class="description">' . htmlspecialchars($post['description']) . '</p>';
                 if ($post['image']) {
                     echo '<img src="../images/' . htmlspecialchars($post['image']) . '" alt="Post Image">';
                 }

@@ -126,15 +126,21 @@ h1, h2 {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 20px;
-    color: red;
+    font-size: 22px;
+    font-weight: bold;
+    color: #444444;
     text-decoration: none;
     background-color: transparent;
     border: none;
+    text-shadow: 0 0 3px #444444, 0 0 3px #444444; 
+    transition: font-size 0.3s ease;
+
 }
 
 .delete-btn:hover {
     cursor: pointer;
+    font-size: 28px;
+    text-shadow: 0 0 5px #444444, 0 0 8px #444444;
 }
 .user-posts img {
     width: 100%; /* Makes the image take the full width of its container */
@@ -158,4 +164,7 @@ h1, h2 {
 
 .logout:hover {
     background-color: #0056b3;
+}
+.description{
+    padding-top: 8px;
 }
