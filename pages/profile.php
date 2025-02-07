@@ -117,13 +117,15 @@ if ($user === null) {
                 if ($post['image']) {
                     echo '<img src="../images/' . htmlspecialchars($post['image']) . '" alt="Post Image">';
                 }
-                echo '<p><strong>Likes:</strong> <span id="likes-count-' . $post['id'] . '">' . $post['likes'] . '</span> <strong>Dislikes:</strong> <span id="dislikes-count-' . $post['id'] . '">' . $post['dislikes'] . '</span></p>';
-                echo '<button id="like-btn-' . $post['id'] . '" class="like-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'like\')">
-                        <i class="ri-thumb-up-line"></i>
-                      </button>';
-                echo '<button id="dislike-btn-' . $post['id'] . '" class="dislike-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'dislike\')">
-                        <i class="ri-thumb-down-line"></i>
-                      </button>';
+                echo '<p>
+                <button id="like-btn-' . $post['id'] . '" class="like-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'like\')">
+                    <i class="ri-thumb-up-line"></i> <span id="likes-count-' . $post['id'] . '">' . $post['likes'] . '</span>
+                </button>
+                <button id="dislike-btn-' . $post['id'] . '" class="dislike-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'dislike\')">
+                    <i class="ri-thumb-down-line"></i> <span id="dislikes-count-' . $post['id'] . '">' . $post['dislikes'] . '</span>
+                </button>
+              </p>';
+        
                 echo '</div>';
             }
             ?>
