@@ -20,7 +20,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-// Check if the user exists
+
 if ($user === null) {
     echo "User not found.";
     exit();
