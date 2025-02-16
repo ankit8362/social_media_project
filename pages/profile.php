@@ -35,46 +35,12 @@ if ($user === null) {
     <title>Profile</title>
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.2.0/remixicon.css">
-    <!-- Font Awesome CDN for Icons -->
+    <!-- Font Awesome CDN for Icons --> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 
 
     <!-- <link rel="stylesheet" href="../assets/js/profile.js"> -->
-    <script>
-    function handleLikeDislike(post_id, action) {
-        console.log("Button clicked. Post ID:", post_id, "Action:", action);
-
-        fetch('like_dislike_post.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `post_id=${post_id}&action=${action}`,
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Response from server:", data);
-            if (data.status === 'success') {
-                document.getElementById(`likes-count-${post_id}`).innerText = data.likes;
-                document.getElementById(`dislikes-count-${post_id}`).innerText = data.dislikes;
-
-                // Update button styles
-                document.getElementById(`like-btn-${post_id}`).classList.toggle('active', action === 'like');
-                document.getElementById(`dislike-btn-${post_id}`).classList.toggle('active', action === 'dislike');
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    function confirmDelete(post_id) {
-        if (confirm("Are you sure you want to delete this post?")) {
-            window.location.href = "delete_post.php?post_id=" + post_id;
-        }
-    }
-    </script>
 </head>
 <body>
     <div class="container">
@@ -136,5 +102,7 @@ if ($user === null) {
                <a href="logout.php" class="logout">Logout</a>
                </button>
     </div>
+
+    <script src="../assets/js/profile_like_dislike.js"></script>
 </body>
 </html>

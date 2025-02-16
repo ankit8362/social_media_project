@@ -63,3 +63,36 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+function handleLikeDislike(post_id, action) {
+    console.log("Button clicked. Post ID:", post_id, "Action:", action);
+
+    fetch('like_dislike_post.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `post_id=${post_id}&action=${action}`,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response from server:", data);
+        if (data.status === 'success') {
+            document.getElementById(`likes-count-${post_id}`).innerText = data.likes;
+            document.getElementById(`dislikes-count-${post_id}`).innerText = data.dislikes;
+
+            // Update button styles
+            document.getElementById(`like-btn-${post_id}`).classList.toggle('active', action === 'like');
+            document.getElementById(`dislike-btn-${post_id}`).classList.toggle('active', action === 'dislike');
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function confirmDelete(post_id) {
+    if (confirm("Are you sure you want to delete this post?")) {
+        window.location.href = "delete_post.php?post_id=" + post_id;
+    }
+}

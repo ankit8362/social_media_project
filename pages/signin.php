@@ -48,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <input type="submit" value="Sign In" class="submit-btn">
         </form>
-
         <div class="signup-link">
             <a href="signup.php">Don't have an account? Sign Up</a>
         </div>
