@@ -10,7 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Sanitize and get form data
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     $image = $_FILES['image']['name'];
     $uploadDir = "../images/";  // Directory where images will be uploaded

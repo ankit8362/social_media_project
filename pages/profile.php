@@ -87,10 +87,14 @@ if ($user === null) {
                 }
                 echo '<p>
                 <button id="like-btn-' . $post['id'] . '" class="like-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'like\')">
-                    <i class="ri-thumb-up-line"></i> <span id="likes-count-' . $post['id'] . '">' . $post['likes'] . '</span>
+                     <i class="ri-thumb-up-line"></i> <span id="likes-count-' . $post['id'] . '">' . $post['likes'] . '</span>
                 </button>
                 <button id="dislike-btn-' . $post['id'] . '" class="dislike-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'dislike\')">
                     <i class="ri-thumb-down-line"></i> <span id="dislikes-count-' . $post['id'] . '">' . $post['dislikes'] . '</span>
+                </button>
+
+                <button  class="like-btn">
+                    <i class="ri-chat-3-line"></i><span > 2 </span>
                 </button>
               </p>';
         

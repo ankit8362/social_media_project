@@ -1,7 +1,6 @@
 <?php
 // header("Content-Type: application/json"); // Set response type as JSON
 session_start();
-
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(['status' => 'error', 'message' => 'You must be logged in to perform this action.']);
@@ -25,7 +24,7 @@ $query = "SELECT * FROM post_likes WHERE user_id = ? AND post_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param('ii', $user_id, $post_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt->get_result(); 
 
 $current_action = null;
 
