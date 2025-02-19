@@ -3,6 +3,21 @@ body {
     background-color: #f9f9f9;
 }
 
+body::before {
+    content: "Ankit Mishra"; /* Watermark text */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg); /* Rotate diagonally */
+    font-size: 120px; /* Increase size */
+    font-weight: bold; /* Make it bold */
+    color: rgba(0, 0, 0, 0.05); /* More transparent */
+    z-index: 9999;
+    white-space: nowrap; /* Prevent text wrapping */
+    pointer-events: none; /* Ensure it doesn't interfere */
+    user-select: none; /* Prevent text selection */
+}
+
 .container {
     max-width: 800px;
     margin: 20px auto;
