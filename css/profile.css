@@ -187,3 +187,44 @@ h1, h2 {
 textarea{
     font-size: 20px;
 }
+
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* So the search bar stays inside */
+}
+
+.search-container {
+    position: absolute; /* Stay inside .container */
+    top: 10px;
+    right: 10px;
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    width: 150px;
+}
+
+.search-container button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+

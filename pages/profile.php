@@ -43,7 +43,15 @@ if ($user === null) {
     <!-- <link rel="stylesheet" href="../assets/js/profile.js"> -->
 </head>
 <body>
+
     <div class="container">
+        <div class="search-container">
+            <form action="search.php" method="GET">
+                <input type="text" name="query" placeholder="Search users..." required>
+                <button type="submit"><i class="ri-search-line"></i></button>
+            </form>
+        </div>
+
         <h1>Your Profile</h1>
 
         <div class="profile">
