@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 include('../includes/db.php');
 
 // Check if the post_id is passed correctly
-if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
+if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])){
     $post_id = $_GET['post_id'];
     $user_id = $_SESSION['user_id'];
 

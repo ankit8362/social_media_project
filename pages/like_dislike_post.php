@@ -28,7 +28,7 @@ $result = $stmt->get_result();
 
 $current_action = null;
 
-if ($result->num_rows > 0) {
+if ($result->num_rows > 0){
     $row = $result->fetch_assoc();
     $current_action = is_null($row['deleted_at']) ? $row['action'] : null;
     
