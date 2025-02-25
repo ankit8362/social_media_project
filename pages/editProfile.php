@@ -17,25 +17,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fullName = $_POST['fullName'];
     $dob = $_POST['dob'];
  // profile-photo
-//  if (!empty($_FILES['profilePic']['name'])) {
-//     // Handle profile picture upload
+//  if (!empty($_FILES['profilePic']['name'])){
 //     $profilePic = $_FILES['profilePic']['name'];
 //     $target_dir = "../images/";
 //     $target_file = $target_dir . basename($profilePic);
     
-//     if (move_uploaded_file($_FILES['profilePic']['tmp_name'], $target_file)) {
-// $sqlUpdate = "UPDATE users SET full_name='$fullName', dob='$dob' , profilePic='$profilePic' WHERE id='$userId'";
-        
-//     } else {
+//     if(move_uploaded_file($_FILES['profilePic']['tmp_name'], $target_file)){
+//         $sqlUpdate = "UPDATE users SET full_name='$fullName', dob='$dob', profile_pic='$profilePic' WHERE id='$userId'";      
+//     }else{
 //         echo "Failed to upload profile picture.";
 //         exit;
 //     }
-// } else {
+// } else{
 //     $sqlUpdate = "UPDATE users SET full_name='$fullName', dob='$dob' WHERE id='$userId'";
 // }
 
     // Update the user's profile
-     $sqlUpdate = "UPDATE users SET full_name='$fullName', dob='$dob' WHERE id='$userId'";
+    $sqlUpdate = "UPDATE users SET full_name='$fullName', dob='$dob' WHERE id='$userId'";
     if ($conn->query($sqlUpdate) === TRUE) {
         header("Location: profile.php");
         exit();
@@ -56,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container">
         <h1>Edit Profile</h1>
-        <form method="POST" class="signup-form">
+        <form method="POST" class="signup-form" enctype="multipart/form-data">
             <div class="input-group">
                 <label for="fullName">Full Name:</label>
                 <input type="text" id="fullName" name="fullName" value="<?php echo htmlspecialchars($user['full_name']); ?>" required>
@@ -65,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($user['dob']); ?>" required>
             </div>
-            <!-- <label for=profilePic>Upload New Profile Picture (optional):</label>
+            <!-- <label for=profilePic>Upload New Profile Picture:</label>
                 <input type="file" name="profilePic" id="ProfilePic"> -->
             <button type="submit" class="submit-btn">Update</button>
         </form>
