@@ -100,10 +100,6 @@ if ($user === null) {
                 <button id="dislike-btn-' . $post['id'] . '" class="dislike-btn" onclick="handleLikeDislike(' . $post['id'] . ', \'dislike\')">
                     <i class="ri-thumb-down-line"></i> <span id="dislikes-count-' . $post['id'] . '">' . $post['dislikes'] . '</span>
                 </button>
-
-                <button  class="like-btn">
-                    <i class="ri-chat-3-line"></i><span > 2 </span>
-                </button>
               </p>';
         
                 echo '</div>';
@@ -118,3 +114,7 @@ if ($user === null) {
     <script src="../assets/js/profile_like_dislike.js"></script>
 </body>
 </html>
+
+<!-- <button  class="like-btn">
+                    <i class="ri-chat-3-line"></i><span > 2 </span>
+                </button> -->

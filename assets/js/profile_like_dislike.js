@@ -122,3 +122,6 @@ function confirmDelete(post_id) {
         window.location.href = "delete_post.php?post_id=" + post_id;
     }
 }
+
+
+
