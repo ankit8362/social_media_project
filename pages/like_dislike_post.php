@@ -19,23 +19,23 @@ $stmt->bind_param('ii', $user_id, $post_id);
 $stmt->execute();
 $result = $stmt->get_result(); 
 $current_action = null;
-if ($result->num_rows > 0){
+if($result->num_rows > 0){
     $row = $result->fetch_assoc();
     $current_action = is_null($row['deleted_at']) ? $row['action'] : null;
-    if ($row['action'] === $action && is_null($row['deleted_at'])) {
+    if($row['action'] === $action && is_null($row['deleted_at'])){
         $soft_delete_query = "UPDATE post_likes SET deleted_at = NOW() WHERE user_id = ? AND post_id = ?";
         $soft_delete_stmt = $conn->prepare($soft_delete_query);
         $soft_delete_stmt->bind_param('ii', $user_id, $post_id);
         $soft_delete_stmt->execute();
         $current_action = null;
-    } else {
+    }else{
         $reactivate_query = "UPDATE post_likes SET action = ?, deleted_at = NULL, updated_at = NOW() WHERE user_id = ? AND post_id = ?";
         $reactivate_stmt = $conn->prepare($reactivate_query);
         $reactivate_stmt->bind_param('sii', $action, $user_id, $post_id);
         $reactivate_stmt->execute();
         $current_action = $action;
     }
-} else {
+}else{
     $insert_query = "INSERT INTO post_likes (user_id, post_id, action, created_at, updated_at, deleted_at) VALUES (?, ?, ?, NOW(), NOW(), NULL)";
     $insert_stmt = $conn->prepare($insert_query);
     $insert_stmt->bind_param('iis', $user_id, $post_id, $action);
