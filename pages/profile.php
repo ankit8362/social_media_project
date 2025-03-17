@@ -1,26 +1,17 @@
 <?php
 session_start();
-
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: signin.php");
     exit();
 }
-
 $user_id = $_SESSION['user_id'];
-
-// Include the database connection
 include('../includes/db.php');
-
-// Fetch user details from the database
 $query = "SELECT * FROM users WHERE id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
-
-
 if ($user === null) {
     echo "User not found.";
     exit();
@@ -38,8 +29,6 @@ if ($user === null) {
     <!-- Font Awesome CDN for Icons --> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-
-
     <!-- <link rel="stylesheet" href="../assets/js/profile.js"> -->
 </head>
 <body>
@@ -79,7 +68,6 @@ if ($user === null) {
         <div class="user-posts">
             <h2>Your Posts</h2>
             <?php
-            // Fetch user posts
             $post_query = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC";
             $post_stmt = $conn->prepare($post_query);
             $post_stmt->bind_param('i', $user_id);

@@ -1,37 +1,27 @@
 <?php
-header("Content-Type: application/json"); // Set response type as JSON
+header("Content-Type: application/json");
 session_start();
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(['status' => 'error', 'message' => 'You must be logged in to perform this action.']);
     exit();
 }
-
 include('../includes/db.php');
-
 $user_id = $_SESSION['user_id'];
 $post_id = intval($_POST['post_id']);
-$action = $_POST['action']; // 'like' or 'dislike'
-
-// Validate action
+$action = $_POST['action'];
 if (!in_array($action, ['like', 'dislike'])) {
     echo json_encode(['status' => 'error', 'message' => 'Invalid action.']);
     exit();
 }
-
-// Check if the user has already liked/disliked the post (including soft-deleted entries)
 $query = "SELECT * FROM post_likes WHERE user_id = ? AND post_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param('ii', $user_id, $post_id);
 $stmt->execute();
 $result = $stmt->get_result(); 
-
 $current_action = null;
-
 if ($result->num_rows > 0){
     $row = $result->fetch_assoc();
     $current_action = is_null($row['deleted_at']) ? $row['action'] : null;
-    
     if ($row['action'] === $action && is_null($row['deleted_at'])) {
         $soft_delete_query = "UPDATE post_likes SET deleted_at = NOW() WHERE user_id = ? AND post_id = ?";
         $soft_delete_stmt = $conn->prepare($soft_delete_query);
@@ -62,12 +52,10 @@ $count_stmt->bind_param('i', $post_id);
 $count_stmt->execute();
 $count_result = $count_stmt->get_result();
 $count_data = $count_result->fetch_assoc();
-
 $update_post_query = "UPDATE posts SET likes = ?, dislikes = ? WHERE id = ?";
 $update_post_stmt = $conn->prepare($update_post_query);
 $update_post_stmt->bind_param('iii', $count_data['likes'], $count_data['dislikes'], $post_id);
 $update_post_stmt->execute();
-
 echo json_encode([
     'status' => 'success',
     'likes' => $count_data['likes'],

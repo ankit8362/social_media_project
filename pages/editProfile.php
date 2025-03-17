@@ -1,8 +1,6 @@
 <?php
 session_start();
 include '../includes/db.php';
-
-// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: signin.php");
     exit();
@@ -16,28 +14,25 @@ $user = $result->fetch_assoc();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fullName = $_POST['fullName'];
     $dob = $_POST['dob'];
- // profile-photo
 //  if (!empty($_FILES['profilePic']['name'])){
 //     $profilePic = $_FILES['profilePic']['name'];
 //     $target_dir = "../images/";
-//     $target_file = $target_dir . basename($profilePic);
-    
+//     $target_file = $target_dir . basename($profilePic); 
 //     if(move_uploaded_file($_FILES['profilePic']['tmp_name'], $target_file)){
 //         $sqlUpdate = "UPDATE users SET full_name='$fullName', dob='$dob', profile_pic='$profilePic' WHERE id='$userId'";      
 //     }else{
 //         echo "Failed to upload profile picture.";
 //         exit;
 //     }
-// } else{
+// }else{
 //     $sqlUpdate = "UPDATE users SET full_name='$fullName', dob='$dob' WHERE id='$userId'";
 // }
 
-    // Update the user's profile
     $sqlUpdate = "UPDATE users SET full_name='$fullName', dob='$dob' WHERE id='$userId'";
-    if ($conn->query($sqlUpdate) === TRUE) {
+    if ($conn->query($sqlUpdate)=== TRUE){
         header("Location: profile.php");
         exit();
-    } else {
+    }else{
         echo "Error: " . $conn->error;
     }
 }

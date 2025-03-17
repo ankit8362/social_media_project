@@ -4,8 +4,6 @@ include '../includes/db.php';
 if (isset($_GET['query'])) {
     $search = trim($_GET['query']);
     $search = $conn->real_escape_string($search);
-
-    // Search query updated with the correct column names
     $sql = "SELECT * FROM users WHERE full_name LIKE '%$search%' OR email LIKE '%$search%'";
 
     $result = $conn->query($sql);
