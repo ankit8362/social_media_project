@@ -20,7 +20,6 @@ $user_likes = [];
 while ($row = $result->fetch_assoc()) {
     $user_likes[$row['post_id']] = $row['action'];
 }
-
 echo json_encode(['status' => 'success', 'user_likes' => $user_likes]);
 exit();
 ?>

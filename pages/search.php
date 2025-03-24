@@ -8,17 +8,17 @@ if (isset($_GET['query'])) {
 
     $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
+    if ($result->num_rows > 0){
         echo "<h2>Search Results:</h2>";
         echo "<ul>";
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()){
             echo "<li><a href='profile.php?id=" . $row['id'] . "'><strong>" . htmlspecialchars($row['full_name']) . "</strong> (" . htmlspecialchars($row['email']) . ")</a></li>";
         }
         echo "</ul>";
-    } else {
+    } else{
         echo "<p>No users found.</p>";
     }
-} else {
+} else{
     echo "<p>Please enter a search query.</p>";
 }
 ?>

@@ -14,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             session_start();
             $_SESSION['user_id'] = $row['id'];
             header("Location: profile.php");
-        } else {
+        } else{
             echo "Invalid password.";
         }
-    } else {
+    } else{
         echo "No user found with this email.";
     }
 }

@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Fetch user's like/dislike status on page load
     fetch('get_user_likes.php')
         .then(response => response.json())
         .then(data => {
@@ -8,8 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 Object.keys(userLikes).forEach(postId => {
                     const likeButton = document.getElementById(`like-btn-${postId}`);
                     const dislikeButton = document.getElementById(`dislike-btn-${postId}`);
-
-                    // Add 'active' class based on the user's like/dislike status
                     if (userLikes[postId] === 'like') {
                         likeButton.classList.add('active');
                         dislikeButton.classList.remove('active');
@@ -21,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })
         .catch(error => console.error('Error fetching user likes:', error));
-
-    // Attach event listeners to like/dislike buttons
     document.querySelectorAll('.like-btn, .dislike-btn').forEach(button => {
         button.addEventListener('click', function () {
             const postId = this.dataset.postId;
@@ -48,8 +43,7 @@ function handleLikeDislike(post_id, action) {
         if (data.status === 'success') {
             document.getElementById(`likes-count-${post_id}`).innerText = data.likes;
             document.getElementById(`dislikes-count-${post_id}`).innerText = data.dislikes;
-
-            // Update button styles
+            // Update button style
             document.getElementById(`like-btn-${post_id}`).classList.toggle('active', action === 'like');
             document.getElementById(`dislike-btn-${post_id}`).classList.toggle('active', action === 'dislike');
         } else {

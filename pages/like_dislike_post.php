@@ -42,7 +42,7 @@ if($result->num_rows > 0){
     $insert_stmt->execute();
     $current_action = $action;
 }
-$count_query = "SELECT 
+$count_query = "SELECT
     SUM(action = 'like' AND deleted_at IS NULL) AS likes, 
     SUM(action = 'dislike' AND deleted_at IS NULL) AS dislikes 
 FROM post_likes 

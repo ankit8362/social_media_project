@@ -32,7 +32,6 @@ if ($user === null) {
     <!-- <link rel="stylesheet" href="../assets/js/profile.js"> -->
 </head>
 <body>
-
     <div class="container">
         <div class="search-container">
             <form action="search.php" method="GET">
@@ -40,9 +39,7 @@ if ($user === null) {
                 <button type="submit"><i class="ri-search-line"></i></button>
             </form>
         </div>
-
         <h1>Your Profile</h1>
-
         <div class="profile">
             <img src="../images/<?php echo htmlspecialchars($user['profile_pic']) ? htmlspecialchars($user['profile_pic']) : 'default-profile.png'; ?>" alt="Profile Picture" class="profile-pic">
             <a href="editProfile.php" class="edit-icon">
@@ -60,8 +57,7 @@ if ($user === null) {
             <form action="create_post.php" method="POST" enctype="multipart/form-data">
                 <textarea name="description" placeholder="Write your post..." required></textarea><br>
                 <input type="file" name="post_image"><br>
-                <button type="submit">Post</button>
-                
+                <button type="submit">Post</button>                
             </form>
         </div>
 
