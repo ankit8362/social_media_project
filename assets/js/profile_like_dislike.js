@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function handleLikeDislike(post_id, action) {
     console.log("Button clicked. Post ID:", post_id, "Action:", action);
-
     fetch('like_dislike_post.php', {
         method: 'POST',
         headers: {
@@ -60,27 +59,33 @@ function confirmDelete(post_id) {
 }
 
 
-// function handleLikeDislike(postId, action) {
+// function handleLikeDislike(postId,action){
 //     const likeCountEl = document.getElementById(`likes-count-${postId}`);
 //     const dislikeCountEl = document.getElementById(`dislikes-count-${postId}`);
 //     const likeButton = document.getElementById(`like-btn-${postId}`);
 //     const dislikeButton = document.getElementById(`dislike-btn-${postId}`);
-
-//     if (action === 'like') {
-//         let newLikes = parseInt(likeCountEl.innerText) + 1;
-//         likeCountEl.innerText = newLikes;
-//         // let newDislikes = parseInt(dislikeCountEl.innerText) - 1;
-//         // dislikeCountEl.innerText=newDislikes;
-
-//         likeButton.classList.add('active');
-//         dislikeButton.classList.remove('active');
-//     } else if (action === 'dislike') {
-//         let newDislikes = parseInt(dislikeCountEl.innerText) + 1;
-//         dislikeCountEl.innerText = newDislikes;
-//         // let newLikes = parseInt(likeCountEl.innerText) - 1;
-//         // likeCountEl.innerText=newLikes;
-
-//         dislikeButton.classList.add('active');
-//         likeButton.classList.remove('active');
-//     }
+//     fetch('like_dislike.php',{
+//         method: 'POST',
+//         headers:{
+//             'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//         body: `post_id=${postId}&action=${action}`
+//     })
+//     .then(response => response.json())
+//     .then(data =>
+//         if(data.success){
+//             likeCountEl.innerText =data.likes;
+//             dislikeCountEl.innerText =data.dislikes;
+//             if(action === 'like'){
+//                 likeButton.classList.add('active');
+//                 dislikeButton.classList.remove('active');
+//             }else if (action === 'dislike'){
+//                 dislikeButton.classList.add('active');
+//                 likeButton.classList.remove('active');
+//             }
+//         }else{
+//             alert("Failed to update. Please try again.");
+//         }
+//     })
+//     .catch(error => console.error('Error:', error));
 // }
