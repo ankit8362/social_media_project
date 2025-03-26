@@ -59,33 +59,35 @@ function confirmDelete(post_id) {
 }
 
 
-// function handleLikeDislike(postId,action){
+// function handleLikeDislike(postId, action) {
 //     const likeCountEl = document.getElementById(`likes-count-${postId}`);
 //     const dislikeCountEl = document.getElementById(`dislikes-count-${postId}`);
 //     const likeButton = document.getElementById(`like-btn-${postId}`);
 //     const dislikeButton = document.getElementById(`dislike-btn-${postId}`);
-//     fetch('like_dislike.php',{
+
+//     fetch('like_dislike_post.php', {
 //         method: 'POST',
-//         headers:{
+//         headers: {
 //             'Content-Type': 'application/x-www-form-urlencoded',
 //         },
 //         body: `post_id=${postId}&action=${action}`
 //     })
 //     .then(response => response.json())
-//     .then(data =>
-//         if(data.success){
-//             likeCountEl.innerText =data.likes;
-//             dislikeCountEl.innerText =data.dislikes;
-//             if(action === 'like'){
+//     .then(data => {
+//         if (data.success) {
+//             likeCountEl.innerText = data.likes;
+//             dislikeCountEl.innerText = data.dislikes;
+//             if (action === 'like') {
 //                 likeButton.classList.add('active');
 //                 dislikeButton.classList.remove('active');
-//             }else if (action === 'dislike'){
+//             } else if (action === 'dislike') {
 //                 dislikeButton.classList.add('active');
 //                 likeButton.classList.remove('active');
 //             }
-//         }else{
+//         } else {
 //             alert("Failed to update. Please try again.");
 //         }
 //     })
 //     .catch(error => console.error('Error:', error));
 // }
+
