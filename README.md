@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌍 Social Media Page  
 
 ## 🚀 Live Demo  
@@ -51,3 +52,6 @@ This project is **live and deployed on InfinityFree**, a free hosting platform.
 1️⃣ **Clone this repository**  
 ```bash
 git clone https://github.com/your-username/Social-Media-Page.git
+=======
+# social_media_project
+>>>>>>> ecd5ecc084e6109a9a546f38d4a0d3717cfdb848
