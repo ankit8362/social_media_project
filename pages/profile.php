@@ -41,16 +41,19 @@ if ($user === null) {
         </div>
         <h1>Your Profile</h1>
         <div class="profile">
-            <img src="../images/<?php echo htmlspecialchars($user['profile_pic']) ? htmlspecialchars($user['profile_pic']) : 'default-profile.png'; ?>" alt="Profile Picture" class="profile-pic">
-            <a href="editProfile.php" class="edit-icon">
-                 <i class="fas fa-pencil-alt"></i>
-            </a>
-            <div class="profile-info">
-                <p><strong>Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
-                <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($user['dob']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-            </div>
-        </div>
+    <div class="profile-pic-container">
+        <img src="../images/<?php echo htmlspecialchars($user['profile_pic']) ? htmlspecialchars($user['profile_pic']) : 'default-profile.png'; ?>" 
+             alt="Profile Picture" class="profile-pic">
+        <a href="editProfile.php" class="edit-icon">
+            <i class="fas fa-pencil-alt"></i>
+        </a>
+    </div>
+    <div class="profile-info">
+        <p><strong>Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
+        <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($user['dob']); ?></p>
+        <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+    </div>
+</div>
 
         <div class="create-post">
             <h2>Create a New Post</h2>
